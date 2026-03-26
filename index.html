@@ -4,92 +4,607 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kreos Labs</title>
+  <meta
+    name="description"
+    content="Kreos Labs builds software systems, integrations, ERP platforms, and custom product solutions for growing businesses."
+  />
   <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: rgba(255, 255, 255, 0.05);
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --muted-2: #94a3b8;
+      --accent: #60a5fa;
+      --accent-2: #22d3ee;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: #ffffff;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96, 165, 250, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 211, 238, 0.14), transparent 24%),
+        linear-gradient(180deg, #081120 0%, #0b1324 40%, #07111f 100%);
       line-height: 1.6;
     }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .hero {
-      padding: 80px 0 40px;
-    }
-    h1 {
-      font-size: 52px;
-      margin-bottom: 16px;
-    }
-    p.lead {
-      font-size: 20px;
-      color: #cbd5e1;
-      max-width: 700px;
-    }
-    .section {
-      margin-top: 60px;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .card {
-      background: #151c33;
-      padding: 20px;
-      border-radius: 14px;
-    }
+
     a {
-      color: #8ab4ff;
+      color: inherit;
       text-decoration: none;
     }
-    .footer {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #26304d;
-      color: #94a3b8;
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 17, 31, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04101f;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      padding: 92px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-left,
+    .hero-right {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left {
+      padding: 46px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-2);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 18px;
+      background: rgba(34, 211, 238, 0.08);
+      border: 1px solid rgba(34, 211, 238, 0.18);
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-stats {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .hero-right {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .mini-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .mini-dot {
+      width: 10px;
+      height: 10px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      flex: 0 0 auto;
+    }
+
+    section {
+      padding: 32px 0 24px;
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(34, 211, 238, 0.16));
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .about-card p,
+    .about-card li {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .about-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .cta {
+      margin: 34px 0 70px;
+      background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(34, 211, 238, 0.10));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta h3 {
+      margin: 0 0 8px;
+      font-size: 1.7rem;
+    }
+
+    .cta p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    footer {
+      padding: 0 0 38px;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .footer-line {
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .services-grid,
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-left {
+        padding: 34px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        gap: 16px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .services-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left,
+      .hero-right,
+      .service-card,
+      .about-card,
+      .cta {
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-left {
+        padding: 26px;
+      }
+
+      .cta {
+        padding: 28px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">Kreos <span>Labs</span></div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
     <section class="hero">
-      <h1>Kreos Labs</h1>
-      <p class="lead">
-        Software systems, integrations, ERP platforms, and custom product engineering for growing businesses.
-      </p>
-    </section>
- 
-    <section class="section">
-      <h2>What we do</h2>
-      <div class="cards">
-        <div class="card">Backend APIs</div>
-        <div class="card">System Integrations</div>
-        <div class="card">ERP Modules</div>
-        <div class="card">Web & Mobile Delivery</div>
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">Software delivery • ERP platforms • Integrations</div>
+          <h1>Building dependable software for growing businesses.</h1>
+          <p class="lead">
+            Kreos Labs helps businesses and software teams deliver backend systems, integrations,
+            ERP platforms, and product solutions with clarity, speed, and engineering discipline.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:chaudharyiitian@gmail.com">Start a conversation</a>
+            <a class="btn btn-secondary" href="#services">Explore services</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Backend-first</strong>
+              <span>APIs, business logic, integrations, and platform workflows.</span>
+            </div>
+            <div class="stat">
+              <strong>Product-ready</strong>
+              <span>Web platforms, ERP modules, and scalable software foundations.</span>
+            </div>
+            <div class="stat">
+              <strong>Flexible delivery</strong>
+              <span>Fixed-scope modules, sprint support, and outsourced engineering.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="panel">
+            <h3>What Kreos Labs focuses on</h3>
+            <p>
+              Clean software delivery for businesses that need reliable execution without unnecessary complexity.
+            </p>
+            <div class="mini-list">
+              <div class="mini-item"><span class="mini-dot"></span><span>Backend APIs and system integrations</span></div>
+              <div class="mini-item"><span class="mini-dot"></span><span>ERP and workflow-driven platforms</span></div>
+              <div class="mini-item"><span class="mini-dot"></span><span>Custom web and mobile product delivery</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Current direction</h3>
+            <p>
+              Alongside client delivery, Kreos Labs is building product capabilities in education technology
+              and intelligent business systems.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
- 
-    <section class="section">
-      <h2>Who we help</h2>
-      <p>
-        We support agencies, software teams, startups, and growing businesses with reliable engineering delivery.
-      </p>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>Services</h2>
+          <p>
+            We support companies that need quality software delivery, stronger backend foundations,
+            and practical engineering support for real business use cases.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">⚙️</div>
+            <h3>Backend Systems</h3>
+            <p>Robust APIs, business logic, service layers, and database-backed platform features.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🔗</div>
+            <h3>Integrations</h3>
+            <p>Connect applications, workflows, and third-party systems with clean integration layers.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🏫</div>
+            <h3>ERP Platforms</h3>
+            <p>Operational software modules for administration, workflows, reporting, and domain-specific needs.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3>Product Delivery</h3>
+            <p>Web and mobile product implementation for startups, internal tools, and growing teams.</p>
+          </div>
+        </div>
+      </div>
     </section>
- 
-    <section class="section">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:chaudharyiitian@gmail.com">chaudharyiitian@gmail.com</a></p>      
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>About</h2>
+          <p>
+            Kreos Labs is a software-focused venture built around dependable delivery, product thinking,
+            and long-term platform value.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>How we work</h3>
+            <p>
+              We focus on practical engineering outcomes: clean implementation, business alignment,
+              and solutions that are stable enough to support real operations.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3>Where we add value</h3>
+            <ul>
+              <li>Overflow engineering support for software teams and agencies</li>
+              <li>Custom backend and integration-led builds</li>
+              <li>ERP and workflow-oriented systems</li>
+              <li>Product development foundations for future growth</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
- 
-    <div class="footer">
-      © 2026 Kreos Labs. All rights reserved.
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h3>Let’s build something useful.</h3>
+            <p>
+              For project discussions, outsourced delivery, or software collaboration, reach out directly by email.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="mailto:chaudharyiitian@gmail.com">Email Kreos Labs</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-line">
+      <span>© 2026 Kreos Labs</span>
+      <span>Software systems • Integrations • ERP platforms • Product engineering</span>
     </div>
-  </div>
+  </footer>
 </body>
 </html>
- 
